@@ -1,12 +1,20 @@
 spring:
   application:
-    name: MMS-PROVIDER
+    name: provider-service
   datasource:
     url: jdbc:mysql://www.itkbp.com:5410/transcode_vms?useUnicode=true&characterEncoding=utf-8
     username: transcoder
     password: transcoder^
     druid:
          driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+      config:
+        discovery:
+         enabled: true
+         service-id: CONFIG-SERVER
+        label: master
+        profile: prod
+        uri: http://user:123456@localhost:9020/
 server:
   port: 8081
 

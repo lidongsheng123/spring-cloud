@@ -8,7 +8,4 @@ spring:
     password: guest
 
 
-encrypt:
-  key: billjiang
-
 

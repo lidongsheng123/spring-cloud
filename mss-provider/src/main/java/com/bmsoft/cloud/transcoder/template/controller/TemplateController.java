@@ -6,6 +6,7 @@ import com.bmsoft.cloud.transcoder.template.servcie.TemplateService;
 import com.bmsoft.cloud.transcoder.template.vo.TemplateVo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,6 +19,15 @@ public class TemplateController {
 
     @Autowired
     private TemplateService templateService;
+
+   @Value("${from}")
+    private String from;
+
+
+   @GetMapping("/config")
+   public String getConfigInfo(){
+       return  this.from;
+   }
 
     /**
      * 根据指定条件获取模板列表。
