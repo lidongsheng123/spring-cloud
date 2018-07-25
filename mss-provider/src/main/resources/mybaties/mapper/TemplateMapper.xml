@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.bmsoft.cloud.transcoder.template.dao.TemplateMapper" >
+
+    <select id="getTemplates" parameterType="com.bmsoft.cloud.transcoder.template.vo.TemplateVo"
+            resultType="com.bmsoft.cloud.transcoder.template.entity.Template">
+            SELECT
+                template_id templateId,
+                template_name templateName,
+                video_coding videoCoding,
+                video_encap videoEncap,
+                resolution resolution,
+                frame_rate frameRate,
+                video_bitrate videoBitrate,
+                audio_coding audioCoding,
+                audio_samplerate audioSamplerate,
+                audio_bitrate audioBitrate,
+                create_user createUser,
+                create_time createTime,
+                edit_time createTime,
+                state state
+            FROM
+                template_info
+             <where>
+                 1=1
+                 <if test="templateName !=null and templateName!=''">
+                     AND  template_name=#{templateName}
+                 </if>
+                 <if test="templateId !=null ">
+                     AND  template_id=#{templateId}
+                 </if>
+                 <if test="type !=null and type!=''">
+                     AND  type=#{type}
+                 </if>
+             </where>
+    </select>
+
+
+    <select id="getTemplateSets" parameterType="string"
+            resultType="com.bmsoft.cloud.transcoder.template.entity.TemplateSets">
+        SELECT
+            templates_id templatesId,
+            templates_name templatesName,
+            create_user createUser,
+            creat_time createTime,
+            update_time updateTime
+        FROM
+          templates_info
+        <where>
+            1=1
+            <if test="templates_name != null and templates_name != ''">
+                AND templates_name=#{templates_name}
+            </if>
+        </where>
+    </select>
+
+    <select id="getTemplateSetDetail" parameterType="int"
+            resultType="com.bmsoft.cloud.transcoder.template.entity.TemplateSetDetail">
+        SELECT
+            templates_id templatesId,
+            templates_name templatesName,
+            create_user createUser,
+            creat_time createTime,
+            update_time updateTime,
+            delete_flg deleteFlg,
+            remark remark
+        FROM
+            templates_info
+        WHERE
+            templates_id=#{templates_id}
+    </select>
+
+    <select id="getTemplateOfSet" parameterType="int"
+            resultType="com.bmsoft.cloud.transcoder.template.entity.Template">
+        SELECT
+                t1.template_id templateId,
+                t1.template_name templateName,
+                t1.video_coding videoCoding,
+                t1.video_encap videoEncap,
+                t1.resolution resolution,
+                t1.frame_rate frameRate,
+                t1.video_bitrate videoBitrate,
+                t1.audio_coding audioCoding,
+                t1.audio_samplerate audioSamplerate,
+                t1.audio_bitrate audioBitrate,
+                t1.create_user createUser,
+                t1.create_time createTime,
+                t1.edit_time createTime,
+                t1.state state
+          FROM
+               template_info t1
+          LEFT JOIN template_rela t2 ON t1.template_id = t2.template_id
+          WHERE
+	      t2.templates_id = #{templateIds}
+    </select>
+
+</mapper>

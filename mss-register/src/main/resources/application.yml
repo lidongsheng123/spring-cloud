@@ -1,0 +1,27 @@
+server:
+  port: 9010
+# 安全认证的配置
+spring:
+  application:
+    #name必须一样，不然高可用会导致unavailable-replicas
+    name: cloud-register-center
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin  # 用户名
+    password: BmSoft123   # 用户密码
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+  #### 清理间隔（单位毫秒，默认是60*1000），开发环境设置如下可快速移除不可用的服务
+    eviction-interval-timer-in-ms: 5000
+    enable-self-preservation: false
