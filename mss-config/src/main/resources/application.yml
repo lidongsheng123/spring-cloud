@@ -16,7 +16,7 @@ spring:
       server:
         git:
           uri: https://github.com/lidongsheng123/spring-cloud.git
-          search-paths: config
+          search-paths: /config-repo/
           username: lidongsheng123
           password: 5f96bd3fddfb1d9874ed87e6e4979c5bba5c1a3e
         health:
