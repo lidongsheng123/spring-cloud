@@ -15,10 +15,10 @@ spring:
     config:
       server:
         git:
-          uri: http://gitlab.bill.com/billjiang/spring-cloud-config.git
+          uri: https://github.com/lidongsheng123/spring-cloud.git
           search-paths: config
-          username: billjiang
-          password: '{cipher}2c50a112807ec405695dac19c15cc6da280d8d70e9998b82a9f11d202a6fb7b4'
+          username: lidongsheng123
+          password: 5f96bd3fddfb1d9874ed87e6e4979c5bba5c1a3e
         health:
           repositories:
             a-hello:
